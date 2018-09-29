@@ -228,4 +228,4 @@ plt.tick_params(axis='both', which='minor', labelsize=14)
 plt.legend(handles=[atlas, cms,cdf,SL,DL,theory_uncert],loc=1,frameon=False,ncol=2,fontsize=12)
 
 plt.show()
-plt.savefig("measurements.eps", format="eps")
+plt.savefig("measurements.pdf")
