@@ -51,18 +51,17 @@ def retrieve_fit_results(filename):
 var_names=["CDF", 
 "ATLAS7_4", 
 "ATLAS8",
-"CMS_ljets",
-"ATLAS13SL",
-"ATLAS13DL"]
+"CMS_ljets"]
 
 ###################### 30_01_17 #######################
-y_offset = 4.8
+y_offset = 2.7
 CDF={} 
-CDF["total"]=[180, 14.58,-14.58]
+# CDF["total"]=[180, 14.58,-14.58]
+CDF["total"]=[180, 80,-80]
 CDF["lumi"]=[6]
 CDF["theory"] = [170, +30, -30]
 CDF["experiment"] = ["Tevetron, CDF"]
-CDF["offset"] = [0,y_offset]
+CDF["offset"] = [-0.25,y_offset]
 CDF["label"] = ["PRD 84 031104(R)\n"+r"$\sqrt{s}=1.96$~TeV"]
 
 # Weird one
@@ -77,11 +76,12 @@ CDF["label"] = ["PRD 84 031104(R)\n"+r"$\sqrt{s}=1.96$~TeV"]
 
 # "Per lepton flavour??" 
 ATLAS7_4={}
-ATLAS7_4["total"]=[63, +18, -18]
+# ATLAS7_4["total"]=[63., 9.2, -8.9] This seems wrong.
+ATLAS7_4["total"]=[63., 18.8, -15.3]
 ATLAS7_4["lumi"]=[4.59]
-ATLAS7_4["theory"] = [48, +10, -10]
+ATLAS7_4["theory"] = [48., +10, -10]
 ATLAS7_4["experiment"]=["ATLAS"]
-ATLAS7_4["offset"] = [-50,-y_offset-0.5]
+ATLAS7_4["offset"] = [-0.18,-y_offset]
 ATLAS7_4["label"] = ["PRD 91 072007 (2015)\n"+r"$\sqrt{s}=7$~TeV"]
 
 
@@ -95,10 +95,10 @@ ATLAS7_4["label"] = ["PRD 91 072007 (2015)\n"+r"$\sqrt{s}=7$~TeV"]
 # It's the same one as above but for combined 
 CMS_ljets={}
 CMS_ljets["total"]=[515,+108.15,-108.15]
-CMS_ljets["lumi"]=[19.7]
+CMS_ljets["lumi"]=[19.7*0.75]
 CMS_ljets["theory"]=[592, +77,-77]
 CMS_ljets["experiment"]=["CMS"]
-CMS_ljets["offset"] = [0,-y_offset-0.5]
+CMS_ljets["offset"] = [0.2,-y_offset-0.5]
 CMS_ljets["label"] = ["JHEP 10 (2017) 006\n$\sqrt{s}=8$~TeV"] 
 
 ATLAS8={}
@@ -106,25 +106,25 @@ ATLAS8["total"]=[139, +18.216, -18.216]
 ATLAS8["lumi"]=[20.2]
 ATLAS8["theory"] = [151, +24, -24]
 ATLAS8["experiment"]=["ATLAS"]
-ATLAS8["offset"] = [0,y_offset]
+ATLAS8["offset"] = [0.26,y_offset]
 ATLAS8["label"] = ["JHEP 11 086 (2017)\n"+r"$\sqrt{s}=8$~TeV"]
 
-ATLAS13SL={}
-ATLAS13SL["total"]=[521, +41.9762, -41.9762]
-ATLAS13SL["lumi"]=[36.1]
-ATLAS13SL["theory"] = [495, +99, -99]
-ATLAS13SL["experiment"]=["ATLAS"]
-ATLAS13SL["offset"] = [0,-y_offset-0.5]
-ATLAS13SL["label"] = ["ATLAS-CONF-2018-048\n"+ r"$\sqrt{s}=13$~TeV"]
+# ATLAS13SL={}
+# ATLAS13SL["total"]=[521, +41.9762, -41.9762]
+# ATLAS13SL["lumi"]=[36.1]
+# ATLAS13SL["theory"] = [495, +99, -99]
+# ATLAS13SL["experiment"]=["ATLAS"]
+# ATLAS13SL["offset"] = [0,-y_offset-0.5]
+# ATLAS13SL["label"] = ["ATLAS-CONF-2018-048\n"+ r"$\sqrt{s}=13$~TeV"]
 
-ATLAS13DL={}
-ATLAS13DL["total"]=[69, +5, -5]
-ATLAS13DL["lumi"]=[36.1]
-ATLAS13DL["theory"] = [63, +9, -9]
-ATLAS13DL["experiment"]=["ATLAS"]
-ATLAS13DL["offset"] = [-50,y_offset]
-ATLAS13DL["label"] = ["ATLAS-CONF-2018-048\n"+ r"$\sqrt{s}=13$~TeV"]
-ATLAS13DL["channel"] = "Dilepton"
+# ATLAS13DL={}
+# ATLAS13DL["total"]=[69, +5, -5]
+# ATLAS13DL["lumi"]=[36.1]
+# ATLAS13DL["theory"] = [63, +9, -9]
+# ATLAS13DL["experiment"]=["ATLAS"]
+# ATLAS13DL["offset"] = [-50,y_offset]
+# ATLAS13DL["label"] = ["ATLAS-CONF-2018-048\n"+ r"$\sqrt{s}=13$~TeV"]
+# ATLAS13DL["channel"] = "Dilepton"
 
 
 # ATLAS13_inclusive={}
@@ -140,8 +140,8 @@ channels["CDF"]=CDF
 channels["ATLAS7_4"]=ATLAS7_4
 channels["ATLAS8"]=ATLAS8
 channels["CMS_ljets"]=CMS_ljets
-channels["ATLAS13SL"]=ATLAS13SL
-channels["ATLAS13DL"]=ATLAS13DL
+# channels["ATLAS13SL"]=ATLAS13SL
+# channels["ATLAS13DL"]=ATLAS13DL
 
 #channels["CMS_fiducial"]=CMS_fiducial
 
@@ -164,13 +164,16 @@ ax.tick_params(axis="y",which="both",direction = 'in')
 ax.minorticks_on()
 ax.tick_params(axis='x', which='both', direction='in')
 
-plt.xlabel(r"Cross section [fb]", 
-  horizontalalignment='right',x=1,fontsize=18)
+# plt.xlabel(r"Cross section [fb]", 
+#   horizontalalignment='right',x=1,fontsize=18)
+plt.xlabel(r"$\sigma_{t\bar{t}\gamma}/\sigma^{\tiny{\text{NLO}}}_{t\bar{t}\gamma}$", 
+ horizontalalignment='right',x=1,fontsize=18)
 plt.ylabel(r"Luminosity [fb$^{-1}$]",fontsize=18,horizontalalignment="left")
 
 # plt.xscale('log')
-plt.axis([0, 700,-4,55])
+plt.axis([0, 2.3,-0.5,27])
 # plt.axis([1, 10000,-2,40])
+plt.axvline(x=1,color="k",alpha=0.25,linestyle="--",zorder=1)
 
 
 # Loop over the user defined channels
@@ -205,12 +208,12 @@ for i in range(0, len(var_names)):
         fillcolour=colour
     except KeyError:
         fillcolour="white"
-    plt.errorbar(theory_nominal, y,xerr=theory_error, ecolor=colour,color=colour,marker="None",ms=7,
-      elinewidth=20,capsize=0, alpha=0.4)
-    plt.errorbar(mu, y,xerr=total_error, ecolor=colour,markeredgecolor=colour,color=fillcolour,marker="o",ms=6,
+    plt.errorbar(1, y,xerr=theory_error/theory_nominal, ecolor=colour,color=colour,marker="None",ms=7,
+      elinewidth=17,capsize=0, alpha=0.3)
+    plt.errorbar(mu/theory_nominal, y,xerr=total_error/theory_nominal, ecolor=colour,markeredgecolor=colour,color=fillcolour,marker="o",ms=6,
       elinewidth=3,capsize=5,zorder=1)
 
-    plt.text(mu-x_label_offset,y+y_label_offset,label,
+    plt.text(mu/theory_nominal-x_label_offset,y+y_label_offset,label,
           fontsize=smallFont, color='black',va="center",horizontalalignment="center")
   draw_measurement()
 
@@ -218,14 +221,19 @@ for i in range(0, len(var_names)):
 atlas = mlines.Line2D([], [], color='b',linewidth=2.5, label=r'ATLAS')
 cms = mlines.Line2D([], [], color='r',linewidth=2.5, label=r'CMS')
 cdf = mlines.Line2D([], [], color='g',linewidth=2.5, label=r'Tevatron, CDF')
-SL = mlines.Line2D([], [],marker="o", color='black',markersize=6,linewidth=0, label=r'Dilepton')
-DL = mlines.Line2D([], [],marker="o", color='white',markeredgecolor="black",markersize=6,linewidth=0, label=r'Single lepton')
+# SL = mlines.Line2D([], [],marker="o", color='black',markersize=6,linewidth=0, label=r'Dilepton')
+# DL = mlines.Line2D([], [],marker="o", color='white',markeredgecolor="black",markersize=6,linewidth=0, label=r'Single lepton')
 
 theory_uncert = mpatches.Patch(color='wheat', label='Theory uncertainty')
 
+# Text for lumi offset for CMS measurement
+plt.text(1.25,14.775,r"$\mathcal{L} \times 0. 75$",
+      fontsize=10, color='black',va="center",horizontalalignment="center")
+
+
 plt.tick_params(axis='both', which='major', labelsize=16)
 plt.tick_params(axis='both', which='minor', labelsize=14)
-plt.legend(handles=[atlas, cms,cdf,SL,DL,theory_uncert],loc=1,frameon=False,ncol=2,fontsize=12)
-
+# plt.legend(handles=[atlas, cms,cdf,SL,DL,theory_uncert],loc=1,frameon=False,ncol=2,fontsize=12)
+plt.legend(handles=[atlas, cms,cdf,theory_uncert],loc=1,frameon=False,ncol=1,fontsize=12)
 plt.show()
 plt.savefig("measurements.pdf")
